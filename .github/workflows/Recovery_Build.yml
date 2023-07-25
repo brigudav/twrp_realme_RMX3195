@@ -109,10 +109,15 @@ jobs:
         repo sync -j$(nproc --all) --force-sync
       working-directory: workspace
       
+    - name: Repopick Patches
+      run: |
+        source build/envsetup.sh
+        repopick 6530
+      working-directory: ${{ steps.pwd.outputs.workspace-folder }}
+
     - name: Clone device tree
       run: |
         git clone ${{ github.event.inputs.DEVICE_TREE_URL }} -b ${{ github.event.inputs.DEVICE_TREE_BRANCH }} ./${{ github.event.inputs.DEVICE_PATH }}
-        rm -rf bootable/recovery && git clone https://github.com/TeamWin/android_bootable_recovery.git -b android-13 --depth 1 bootable/recovery
       working-directory: ${{ steps.pwd.outputs.workspace-folder }}
 
     - name: Clone common tree
