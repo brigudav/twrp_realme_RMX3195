@@ -99,8 +99,8 @@ jobs:
         mkdir workspace
         cd workspace
         echo "workspace-folder=$(pwd)" >> $GITHUB_OUTPUT
-        git config --global user.name "Nico170420"
-        git config --global user.email "b170420nc@gmail.com"
+        git config --global user.name "brigudav"
+        git config --global user.email "alexvl1972@hotmail.com"
         repo init --depth=1 -u ${{ github.event.inputs.MANIFEST_URL }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}
       id: pwd
           
@@ -112,7 +112,7 @@ jobs:
     - name: Clone device tree
       run: |
         git clone ${{ github.event.inputs.DEVICE_TREE_URL }} -b ${{ github.event.inputs.DEVICE_TREE_BRANCH }} ./${{ github.event.inputs.DEVICE_PATH }}
-        rm -rf bootable/recovery && git clone https://github.com/TeamWin/android_bootable_recovery -b android-13 --depth 1 bootable/recovery
+        rm -rf bootable/recovery && git clone https://github.com/TeamWin/android_bootable_recovery.git -b android-13 --depth 1 bootable/recovery
       working-directory: ${{ steps.pwd.outputs.workspace-folder }}
 
     - name: Clone common tree
